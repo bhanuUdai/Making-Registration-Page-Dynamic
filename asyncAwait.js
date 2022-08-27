@@ -43,8 +43,8 @@
 console.log('Person 1: show ticket')
 console.log('Person 2: show ticket')
 
-let ticket=async()=>
-{
+let ticket=async()=>               // async( ) is used to describe function as async
+{                                   // async function returns promises
     let wifeBringBackTicket=new Promise((resolve,reject)=>
     {
         setTimeout(()=>
@@ -69,8 +69,8 @@ let ticket=async()=>
         resolve('cold drink')
     })
 
-    let tick= await wifeBringBackTicket;
-
+    let tick= await wifeBringBackTicket;    // await only used inside async function, it will not outside async
+                                            // it put holds the code below it , and execute onlyb after function containing promise describe by await get resolved
     console.log(`wife : i have ${tick}`);
     console.log('husband : we should go in');
     console.log('wife : i am hungry');
@@ -93,13 +93,13 @@ let ticket=async()=>
     console.log('husband : we should go in');
     console.log('wife : yeah sure')
 
-    return tick
+    return tick       // after console the code above it will return this 'tick' which contains result of first promise
 }
 
 
 
 
-ticket().then((m)=>
+ticket().then((m)=>                   // async function always called by using then. because they returns promises
 {
     console.log(`Person 3: show ${m}`)
 })
