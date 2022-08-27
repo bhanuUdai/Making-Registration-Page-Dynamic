@@ -117,52 +117,88 @@
 
 
 
+// console.log('Person 1: show ticket')
+// console.log('Person 2: show ticket')
+
+// let getTicket=async()=>
+// {
+//     let wifeBringBackTicket=new Promise((resolve,reject)=>
+//     {
+//         setTimeout(()=>
+//         {
+//             resolve('ticket')
+//         },2000)
+//     })
+
+// let getPopcorn=new Promise((resolve,reject)=>
+// {
+//     resolve('popcorn')
+// })
+
+// let getCandy=new Promise((resolve,reject)=>
+// {
+//     resolve('candy')
+// })
+
+// let getCoke=new Promise((resolve,reject)=>
+// {
+//     resolve('coca-cola')
+// })
+
+
+// let ticket= await wifeBringBackTicket;  // first wife will get ticket, then they will move ahead to take popcorn and coke
+
+// let [pop,candy,coke]=await Promise.all([getPopcorn,getCandy,getCoke])   // promise.all return array therefor we are string each element of array with name pop, candy and coke
+
+// console.log(`${pop} ${candy} ${coke}`)
+
+// return ticket                            // at last tcket wiil return and both will go to watchb movie
+
+// }
+
+// getTicket().then((m)=>
+// {
+//     console.log(`Person : 3 show ${m}`)
+// })
+
+
+
+
+
+// console.log('Person 4: show ticket')
+// console.log('Person 5: show ticket')
+
+
+//catching reject promises in async function//-------------------------------
+
+
+
+
 console.log('Person 1: show ticket')
 console.log('Person 2: show ticket')
 
-let getTicket=async()=>
+let movie=async()=>
 {
-    let wifeBringBackTicket=new Promise((resolve,reject)=>
+    let getTicket=new Promise((resolve,reject)=>
     {
-        setTimeout(()=>
-        {
-            resolve('ticket')
-        },2000)
+        reject('sad face')
     })
 
-let getPopcorn=new Promise((resolve,reject)=>
+let ticket;
+try{                                    // try with execute if promise will resolve
+    ticket =await getTicket;
+}
+catch(e)                                //catch will execute if promise get rejected
 {
-    resolve('popcorn')
-})
-
-let getCandy=new Promise((resolve,reject)=>
-{
-    resolve('candy')
-})
-
-let getCoke=new Promise((resolve,reject)=>
-{
-    resolve('coca-cola')
-})
-
-
-let ticket= await wifeBringBackTicket;  // first wife will get ticket, then they will move ahead to take popcorn and coke
-
-let [pop,candy,coke]=await Promise.all([getPopcorn,getCandy,getCoke])   // promise.all return array therefor we are string each element of array with name pop, candy and coke
-
-console.log(`${pop} ${candy} ${coke}`)
-
-return ticket                            // at last tcket wiil return and both will go to watchb movie
-
+    ticket='sad face'
 }
 
-getTicket().then((m)=>
-{
-    console.log(`Person : 3 show ${m}`)
-})
+return ticket
 
+}
+movie().then((m)=>console.log(`Person 3: show ${m}`))
 
-
+// what ever will be the output, it will printed through then.
 
 
 console.log('Person 4: show ticket')
