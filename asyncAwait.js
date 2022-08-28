@@ -174,32 +174,135 @@
 
 
 
-console.log('Person 1: show ticket')
-console.log('Person 2: show ticket')
+// console.log('Person 1: show ticket')
+// console.log('Person 2: show ticket')
 
-let movie=async()=>
+// let movie=async()=>
+// {
+//     let getTicket=new Promise((resolve,reject)=>
+//     {
+//         reject('sad face')
+//     })
+
+// let ticket;
+// try{                                    // try with execute if promise will resolve
+//     ticket =await getTicket;
+// }
+// catch(e)                                //catch will execute if promise get rejected
+// {
+//     ticket='sad face'
+// }
+
+// return ticket
+
+// }
+// movie().then((m)=>console.log(`Person 3: show ${m}`))
+
+// // what ever will be the output, it will printed through then.
+
+
+// console.log('Person 4: show ticket')
+// console.log('Person 5: show ticket')
+
+
+//--//-----------------------
+
+
+
+
+
+
+
+
+let posts=[{title:'user 1',time: new Date().getTime()},
+{title:'user 2',time: new Date().getTime()}];
+
+
+// making function having promise inside to craete post and print in console
+function createPost(post)
 {
-    let getTicket=new Promise((resolve,reject)=>
+    
+    return new Promise((resolve,reject)=>
     {
-        reject('sad face')
+        setTimeout(()=>
+        {
+            posts.push(post)
+                                                                                                                                                
+             //resolve([...posts])
+             let x=[];                          // here if i donot store posts in x[] , it will only print 2 objectets and not this newly created object
+                for(let i=0;i<posts.length;i++) // because below down we are also using delete function and it will delete object from posts refrence
+                {                                // therefor storing values in x[]
+                    x.push(posts[i])
+                }
+             resolve(x)
+        },1000)
+        
     })
-
-let ticket;
-try{                                    // try with execute if promise will resolve
-    ticket =await getTicket;
 }
-catch(e)                                //catch will execute if promise get rejected
+
+// creating deletePost function having promise inside
+function deletePost()
 {
-    ticket='sad face'
+    return new Promise((resolve,reject)=>
+    {
+        
+        if(posts.length>0)
+        {
+            resolve(posts.pop())
+        }
+        else
+        {
+            reject('array is empty')
+        }
+        reject('array is empty')
+    },2000)
 }
 
-return ticket
+
+function getPost()
+{
+    return new Promise((resolve,reject)=>
+    {
+        setTimeout(()=>
+        {
+            if(posts.length>0)
+            {
+                resolve(posts)
+            }
+            else
+            {
+                reject()
+            }
+       // reject('not getting post')
+        },1000)
+        
+    })
+}
+
+// creating async function
+//await only works inside the async function
+// async function always return promises
+// always use try{} and catch(e){} inside async await to catch rejections
+// try is for resolve
+//catch is for rejection
+
+let modifyPost=async()=>
+{
+try{
+    let create=await createPost({title:'user 3',time: new Date().getTime()});
+    create=await createPost({title:'user 4',time: new Date().getTime()});
+    console.log(create)
+
+    let deletepost =await deletePost()
+
+    let getpost=await getPost()
+    console.log(getpost)
+}
+catch(e)
+{
+    console.log(e)
+}
 
 }
-movie().then((m)=>console.log(`Person 3: show ${m}`))
 
-// what ever will be the output, it will printed through then.
-
-
-console.log('Person 4: show ticket')
-console.log('Person 5: show ticket')
+modifyPost()  // don't forget to callb the function
